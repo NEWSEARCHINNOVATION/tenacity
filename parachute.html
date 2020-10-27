@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<title>DIAMETER OF PARACHUTE</title>
+<head>
+<style>
+body{
+  background-image: url('isr.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+input[type = number] {
+width: 100px;
+height:15px;
+}
+label {
+  line-height :1.5;
+  width:200px;
+  display: inline-block;
+}
+</style>
+</head>
+<body>
+<center>
+<h1>Descent Stage Calculator</h1>
+<form name="form1">
+    <label><b>Mass of the rocket(kg)</b></label>
+    <input type="number" name="m"></br>
+    <label><b>Ground hit Velocity(m/s)</b></label>
+    <input type="number" name="v"></br>
+     <label><b>Drag co efficient of parachute</b></label>
+    <input type="number" name="cd"></br>
+    <label><b>Max altitude attained by rocket(m)</b></label>
+    <input type="number" name="S"></br>
+    <label><b>Velocity of Air(m/s)</b></label>
+    <input type="number" name="vair"></br>
+    <button type="button" onclick="myfunc()">Calculate</button>
+</form>
+ <p id="a1"></p>
+ <p id="a2"></p>
+ <p id="a3"></p>
+</center>
+</body>
+<script>
+function myfunc()	{
+	var m=document.forms["form1"]["m"].value;
+	m=parseFloat(m);
+	var v=document.forms["form1"]["v"].value;
+	v=parseFloat(v);
+	var cd=document.forms["form1"]["cd"].value;
+	cd=parseFloat(cd);
+	var S=document.forms["form1"]["S"].value;
+	S=parseFloat(S);
+	var vair=document.forms["form1"]["vair"].value;
+	vair=parseFloat(vair);
+	var rho=1.225;
+	var g=9.8;
+	var pi=3.14159265359;
+        var theta=vair/v;
+	var distance=S*theta;
+	var D=Math.sqrt((8*m*g)/(pi*rho*cd*v*v));
+	var t=S/v;
+	D=parseFloat(D);
+	t=parseFloat(t);
+	distance=parseFloat(distance);
+	document.getElementById("a1").innerHTML="Diameter of parachute = "+D.toFixed(2)+" m"
+        document.getElementById("a2").innerHTML="Descent time = "+t.toFixed(2)+" s"
+        document.getElementById("a3").innerHTML="Deviated distance from launch site = "+distance.toFixed(2)+" m"
+}
+</script>
+</html>

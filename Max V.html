@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<title>MAX VELOCITY</title>
+<head>
+<style>
+
+body{
+  background-image: url('isr.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+input[type = number] {
+width: 100px;
+height:15px;
+}
+label {
+  line-height :1.5;
+  width:200px;
+  display: inline-block;
+}
+</style>
+</head>
+<body>
+<center>
+<h1>Max Velocity Calculator</h1>
+<form name="form1">
+    <label><b>Coasting distance to achieve (metre/s)</b></label>
+    <input type="number" name="a" align="right"></br>
+    <label><b>Diameter of the rocket (metre/s)</b></label>
+    <input type="number" name="d"></br>
+     <label><b>Dry mass of the rocket (kilogram/s)</b></label>
+    <input type="number" name="m"></br>
+    <label><b>Drag coefficient</b></label>
+    <input type="number" name="cd"></br>
+    <button type="button" onclick="myfunc()">Calculate</button>
+</form>
+ <p id="a1"></p>
+ <p id="a2"></p>
+</center>
+</body>
+<script>
+function myfunc()	{
+	var a=document.forms["form1"]["a"].value;
+	a=parseFloat(a);
+	var d=document.forms["form1"]["d"].value;
+	d=parseFloat(d);
+	var m=document.forms["form1"]["m"].value;
+	m=parseFloat(m);
+	var cd=document.forms["form1"]["cd"].value;
+	cd=parseFloat(cd);
+	var g=9.8;
+	var A = (3.14*d**2)/4;
+	var k = 0.5*1.2*cd*A;
+	var b=(m*g)/k;
+	var c=(2*k*a)/m;
+	var v=Math.sqrt(b*(Math.exp(c)-1));
+	var qa = Math.sqrt(m*g / k);
+	var qb = Math.sqrt(g*k / m);
+	var ta = Math.atan(v / qa) / qb;
+	ta=parseFloat(ta);
+	document.getElementById("a1").innerHTML="Max velocity = "+v.toFixed(2) +" m/s " 
+        document.getElementById("a2").innerHTML= "Coasting time = "+ta.toFixed(2)+" s "
+}
+</script>
+</html>

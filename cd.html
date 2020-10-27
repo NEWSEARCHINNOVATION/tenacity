@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<title>DRAG COEFFICIENT</title>
+<head>
+<style>
+
+body{
+  background-image: url('isr.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+input[type = number] {
+width: 100px;
+height:15px;
+}
+label {
+  line-height :1.5;
+  width:200px;
+  display: inline-block;
+}
+</style>
+</head>
+<body>
+<center>
+<h1>Drag Co-efficient Calculator</h1>
+<p >All input values must be in metres</p>
+<form name="form1">
+    <label><b>Total length of rocket</b></label>
+    <input type="number" name="ltr"></br>
+    <label><b>Diameter of rocket body</b></label>
+    <input type="number" name="db"></br>
+     <label><b>Total length of rocket body</b></label>
+    <input type="number" name="lb"></br>
+    <label><b>Total length of nose cone</b></label>
+    <input type="number" name="ln"></br>
+    <label><b>Diameter of rocket base</b></label>
+    <input type="number" name="dd"></br>
+    <label><b>Length of boat tail</b></label>
+    <input type="number" name="lc"></br>
+    <label><b>Thickness of body</b></label>
+    <input type="number" name="tf"></br>
+    <label><b>Length between midpoint of tip & root chord</b></label>
+    <input type="number" name="lm"></br>
+    <label><b>Number of fins used</b></label>
+    <input type="number" name="n"></br>
+    <label><b>Diameter of the body tube at the fin root</b></label>
+    <input type="number" name="df"></br>
+    <label><b>Length of root chord</b></label>
+    <input type="number" name="lr"></br>
+    <label><b>Length of tip chord</b></label>
+    <input type="number" name="lt"></br>
+    <label><b>Height of fin</b></label>
+    <input type="number" name="ls"></br>
+    <button type="button" onclick="myfunc()">Calculate</button>
+</form>
+ <p id="a1"></p>
+</center>
+</body>
+<script>
+function myfunc()	{
+	var ltr=document.forms["form1"]["ltr"].value;
+	ltr=parseFloat(ltr);
+	var db=document.forms["form1"]["db"].value;
+	db=parseFloat(db);
+	var lb=document.forms["form1"]["lb"].value;
+	lb=parseFloat(lb);
+	var ln=document.forms["form1"]["ln"].value;
+	ln=parseFloat(ln);
+	var dd=document.forms["form1"]["dd"].value;
+	dd=parseFloat(dd);
+	var lc=document.forms["form1"]["lc"].value;
+	lc=parseFloat(lc);
+	var tf=document.forms["form1"]["tf"].value;
+	tf=parseFloat(tf);
+	var lm=document.forms["form1"]["lm"].value;
+	lm=parseFloat(lm);
+	var n=document.forms["form1"]["n"].value;
+	n=parseFloat(n);
+	var df=document.forms["form1"]["df"].value;
+	df=parseFloat(df);
+	var lr=document.forms["form1"]["lr"].value;
+	lr=parseFloat(lr);
+	var lt=document.forms["form1"]["lt"].value;
+	lt=parseFloat(lt);
+	var ls=document.forms["form1"]["ls"].value;
+	ls=parseFloat(ls);
+	var Rec=5*(10**5);
+	var V=274.4;
+	var ro=1.225;
+	var mu=0.0000181;
+	var c=ltr/db;
+	var x=lb/db;
+	var y=ln/db;
+	var z=lc/db;
+	var zz=dd/db;
+	var Re=(ro*V*ltr)/mu;
+	var B=Rec*((0.074/Re**(1/5.0))-(1.328/(Math.sqrt(Re))));
+	var cff=((0.074/Re**(1/5.0))-(B/Re));
+	var cdfb=((1+(60/(c**3))+(0.0025*x))*((2.7*(y))+(4*(x))+(2*(1-(zz))))*cff);
+	var cdb=(0.029*zz**3)/(Math.sqrt(cdfb));
+        var Afe=0.5*ls*(lr+lt);
+        var Afp=Afe+(0.5*df*lr);
+        var cdf=2*cff*(1+(2*(tf/lm)))*((4*n*Afp)/(3.14*df**2));
+        var cdi=2*cff*(1+(2*(tf/lm)))*((4*n*(Afp-Afe))/(3.14*df**2));
+        var cd=cdfb+cdb+cdf+cdi;
+	cd=parseFloat(cd);
+	document.getElementById("a1").innerHTML="Drag Co-efficient = "+cd.toFixed(2) 
+}
+</script>
+</html>
